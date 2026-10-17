@@ -30,7 +30,7 @@ final class SleeveEnvironment: ObservableObject {
     lazy var overlay = MenuBarOverlayController(sections: sections, spindle: spindle)
     lazy var gestures = RevealGestures(sections: sections, spindle: spindle)
     lazy var cover = CoverController(sections: sections)
-    let updater = Updater(appName: "Sleeve")
+    let updater = Updater(appName: "Sleeve", repository: "zaineldinbarakat-droid/sleeve")
 
     @Published var settingsTab: SettingsTab = .general
 
