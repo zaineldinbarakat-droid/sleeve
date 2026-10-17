@@ -10,18 +10,23 @@
 </p>
 
 <p align="center">
+  🤝 <b>Made to be compatible with <a href="https://github.com/zaineldinbarakat-droid/spindle">Spindle</a></b>, my notch turntable — use them together, or each on its own.
+</p>
+
+<p align="center">
   <a href="https://github.com/zaineldinbarakat-droid/sleeve/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/zaineldinbarakat-droid/sleeve?label=release&color=6b54ed"></a>
   <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-black?logo=apple">
   <img alt="Swift 6" src="https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white">
   <img alt="SwiftUI + AppKit" src="https://img.shields.io/badge/UI-SwiftUI%20%2B%20AppKit-0A84FF">
   <img alt="Apple Silicon" src="https://img.shields.io/badge/Apple%20Silicon-native-555">
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-3da639"></a>
+  <a href="https://github.com/zaineldinbarakat-droid/spindle"><img alt="Works with Spindle" src="https://img.shields.io/badge/works%20with-Spindle-e8735b"></a>
 </p>
 
 <p align="center">
   <a href="https://github.com/zaineldinbarakat-droid/sleeve/releases/latest/download/Sleeve.zip"><b>⬇︎ Download Sleeve</b></a>
   &nbsp;·&nbsp;
-  <a href="#made-to-work-with-spindle">Works with Spindle</a>
+  <a href="#made-to-be-compatible-with-spindle">Works with Spindle</a>
   &nbsp;·&nbsp;
   <a href="#under-the-hood">Under the hood</a>
 </p>
@@ -34,8 +39,6 @@
     <td align="center"><b>Hover the bar — they're back</b><br><img src="docs/images/bar-revealed.png" alt="The menu bar with apps revealed to the left of Sleeve's icon"></td>
   </tr>
 </table>
-
-> 🤝 **Made to work with [Spindle](https://github.com/zaineldinbarakat-droid/spindle)**, my retro turntable for the MacBook notch. The two apps talk to each other and share the top of your screen seamlessly — and each works perfectly on its own.
 
 ## Features
 
@@ -52,7 +55,7 @@
   <img src="docs/images/sleeve-appearance.png" width="49%" alt="Sleeve's menu bar colour settings with a live preview">
 </p>
 
-## Made to work with Spindle
+## Made to be compatible with Spindle
 
 Sleeve and [**Spindle**](https://github.com/zaineldinbarakat-droid/spindle) — a retro turntable that lives in your MacBook's notch — were designed as a pair:
 
