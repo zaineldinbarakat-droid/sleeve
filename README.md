@@ -31,6 +31,24 @@
   <a href="#under-the-hood">Under the hood</a>
 </p>
 
+<details>
+<summary><b>🇩🇪 Auf Deutsch lesen</b></summary>
+
+### Sleeve – ein Menüleisten-Manager für macOS
+
+Sleeve räumt deine Menüleiste auf: Deine Apps bleiben verborgen, bis du mit der Maus über die Leiste fährst.
+
+- **Alles verbergen bis zum Hovern:** Die Menüleiste zeigt nur Sleeve und Apples eigene Symbole. Fährst du darüber, erscheinen deine Apps sofort – fährst du weg, verschwinden sie wieder.
+- **Echtes Ausblenden unter macOS 27:** Sleeve nutzt die systemeigene Einschränkung der Menüleiste, sodass ausgeblendete Symbole wirklich Platz freigeben.
+- **Für jede App einstellbar:** *Immer* sichtbar, *beim Hovern* sichtbar oder *versteckt* in einem eigenen Bereich.
+- **Farben und Verläufe** für die Menüleiste, **20 Icon-Stile** (auch jedes beliebige Emoji), Zen-Modus, Suche, Tastenkürzel und Automationen.
+- **Leichtgewichtig:** Im Leerlauf nur ca. 0,1 % CPU und 15 MB Arbeitsspeicher.
+- **Kompatibel mit [Spindle](https://github.com/zaineldinbarakat-droid/spindle):** Beide Apps sind aufeinander abgestimmt – sie teilen sich den oberen Bildschirmrand, öffnen nie gleichzeitig, und die Menüleiste kann die Farbe des Songs in Spindle übernehmen. Jede App funktioniert aber auch allein.
+
+**Installation:** [Sleeve.zip herunterladen](https://github.com/zaineldinbarakat-droid/sleeve/releases/latest/download/Sleeve.zip), entpacken und in **Programme** ziehen (dort muss Sleeve liegen). Beim ersten Start unter **Systemeinstellungen → Datenschutz & Sicherheit** auf **Trotzdem öffnen** klicken und Sleeve den Zugriff auf **Bedienungshilfen** erlauben. Danach das Sleeve-Symbol einmal mit gedrückter ⌘-Taste rechts neben deine Apps ziehen. Voraussetzung: Mac mit Apple-Chip und macOS 14 oder neuer. Sleeve aktualisiert sich selbst.
+
+</details>
+
 <table align="center">
   <tr>
     <td align="center"><b>Apps tucked away</b><br><img src="docs/images/bar-hidden.png" alt="The menu bar with only Sleeve's icon and Apple's icons"></td>
