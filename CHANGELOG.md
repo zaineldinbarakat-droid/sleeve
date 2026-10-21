@@ -2,6 +2,10 @@
 
 All notable changes to Sleeve.
 
+## 0.6.1 — Lighter at rest
+- **Lighter on the battery:** Sleeve re-reads the menu bar every 3 s while the cursor is up at it and every 9 s otherwise (it was every 3 s always), not at all while the display sleeps, and asks every running app about icons every 3 minutes instead of every minute. Apps launching or quitting still trigger a fresh scan straight away. Idle, it now sits at about 0.04 % CPU.
+- A closed Settings window lets go of its views: they used to redraw every icon after each scan with nobody looking.
+
 ## 0.6.0 — Its own repository
 - Sleeve now lives in its own repository and updates from it. Its companion notch player, [Spindle](https://github.com/zaineldinbarakat-droid/spindle), has its own too; the two still work together.
 

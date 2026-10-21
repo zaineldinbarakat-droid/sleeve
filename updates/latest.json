@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0",
-  "notes": "Sleeve now lives in its own repository (github.com/zaineldinbarakat-droid/sleeve) and updates from it. Its companion, Spindle, has its own; they still work together.",
+  "version": "0.6.1",
+  "notes": "Lighter on the battery: Sleeve re-reads the menu bar less often when you're not at it, never while the display sleeps, and a closed Settings window stops redrawing.",
   "minimumSystemVersion": "14.0"
 }
