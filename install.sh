@@ -15,5 +15,7 @@ pkill -x Sleeve 2>/dev/null || true
 
 rm -rf "/Applications/Sleeve.app"
 /usr/bin/ditto "$ROOT/build/Sleeve.app" "/Applications/Sleeve.app"
+# Otherwise Spotlight finds two Sleeves: this one and the build copy.
+rm -rf "$ROOT/build/Sleeve.app"
 echo "Installed /Applications/Sleeve.app"
 open "/Applications/Sleeve.app"
