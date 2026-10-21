@@ -100,6 +100,8 @@ final class SectionManager: ObservableObject {
     private let scanQueue = DispatchQueue(label: "com.spindle.sleeve.scan", qos: .userInitiated)
     private var rehideTimer: Timer?
     private var rescanTimer: Timer?
+    private var lastPeriodicScan = Date.distantPast
+    private var screensAsleep = false
     private var cancellables = Set<AnyCancellable>()
 
     // Native hiding state.
@@ -186,11 +188,23 @@ final class SectionManager: ObservableObject {
             Task { @MainActor in self?.holdRevealed(for: 3) }
         }
 
-        // Positions move whenever apps launch, quit or resize their items.
+        // Positions move whenever apps launch, quit or resize their items. Sleeve rescans
+        // after everything it does itself; this catches what other apps do. See
+        // `periodicRescan` for how often. The slack lets macOS batch the wakeup.
         rescanTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.rescan() }
+            Task { @MainActor in self?.periodicRescan() }
         }
+        rescanTimer?.tolerance = 1
         let center = NSWorkspace.shared.notificationCenter
+        center.addObserver(forName: NSWorkspace.screensDidSleepNotification, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in self?.screensAsleep = true }
+        }
+        center.addObserver(forName: NSWorkspace.screensDidWakeNotification, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in
+                self?.screensAsleep = false
+                self?.rescan()
+            }
+        }
         center.addObserver(forName: NSWorkspace.didLaunchApplicationNotification, object: nil, queue: .main) { [weak self] note in
             let app = note.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication
             Task { @MainActor in
@@ -397,6 +411,19 @@ final class SectionManager: ObservableObject {
     }
 
     // MARK: - Scanning
+
+    /// The timer's rescan. Every scan asks each app with an icon about it over
+    /// Accessibility, waking that app too, so it runs only as often as it's useful:
+    /// every 3 s while the cursor is up at the menu bar, every 9 s otherwise, and not
+    /// at all while the screens are asleep.
+    private func periodicRescan() {
+        guard !screensAsleep else { return }
+        let mouse = NSEvent.mouseLocation
+        let nearBar = NSScreen.screens.contains { $0.frame.contains(mouse) && mouse.y > $0.frame.maxY - 60 }
+        guard nearBar || Date().timeIntervalSince(lastPeriodicScan) >= 9 else { return }
+        lastPeriodicScan = Date()
+        rescan()
+    }
 
     func rescan(full: Bool = false) {
         let trusted = AXIsProcessTrusted()

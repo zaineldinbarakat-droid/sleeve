@@ -99,9 +99,10 @@ enum MenuBarScanner {
     ///
     /// Asking every running app costs: over a hundred processes, two seconds of
     /// Accessibility round-trips, most of them to background processes that can't have
-    /// an icon at all. So a full scan (apps that can show UI) runs at most once a minute,
-    /// or when asked (`full`, on an app launching or quitting); in between, only the
-    /// handful of apps that had icons last time are re-read.
+    /// an icon at all. So a full scan (apps that can show UI) runs when asked (`full`, on
+    /// an app launching or quitting) and otherwise only every three minutes, for an app
+    /// that adds its icon long after starting; in between, only the handful of apps that
+    /// had icons last time are re-read.
     static func scan(full: Bool = false) -> [MenuBarItem] {
         guard AXIsProcessTrusted() else { return [] }
         let primaryHeight = NSScreen.screens.first?.frame.height ?? 0
@@ -110,7 +111,7 @@ enum MenuBarScanner {
 
         lock.lock()
         let known = knownOwners
-        let doFull = full || known.isEmpty || Date().timeIntervalSince(lastFullScan) > 60
+        let doFull = full || known.isEmpty || Date().timeIntervalSince(lastFullScan) > 180
         lock.unlock()
 
         let owners: [Owner] = doFull

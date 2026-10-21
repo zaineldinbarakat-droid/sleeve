@@ -6,6 +6,7 @@ import SpindleSync
 @MainActor
 enum SleeveSettingsWindow {
     private static var window: NSWindow?
+    private static var closeObserver: NSObjectProtocol?
 
     static func show(tab: SettingsTab = .general) {
         let env = SleeveEnvironment.shared
@@ -29,6 +30,18 @@ enum SleeveSettingsWindow {
         created.isReleasedWhenClosed = false
         created.center()
         window = created
+        // Closed, Settings lets go of its views. Kept alive, they redrew every icon in
+        // the lists after each menu bar scan, with nobody looking.
+        closeObserver = NotificationCenter.default.addObserver(
+            forName: NSWindow.willCloseNotification, object: created, queue: .main
+        ) { _ in
+            MainActor.assumeIsolated {
+                if let closeObserver { NotificationCenter.default.removeObserver(closeObserver) }
+                closeObserver = nil
+                window?.contentView = nil
+                window = nil
+            }
+        }
         NSApp.activate(ignoringOtherApps: true)
         created.makeKeyAndOrderFront(nil)
     }
